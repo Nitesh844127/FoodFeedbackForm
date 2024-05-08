@@ -1,0 +1,118 @@
+﻿@model FoodFeedbackForm.Models.Feedback
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+  
+    .form-container {
+        width: 500px;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        padding: 20px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-left:30%;
+    }
+
+      
+        .form-container:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+  
+    .form-control {
+        margin-bottom: 10px;
+    }
+
+  
+    .btn-primary {
+        width: 100%;
+    }
+</style>
+
+
+  <div class="form-container " >
+    <div class="row  bg-primary text-white text-center">
+        <h1>Feedback Form</h1>
+    </div>
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="name" class="control-label">Name:</label>
+            <input asp-for="name" class="form-control" />
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="email" class="control-label">Email:</label>
+            <input asp-for="email" class="form-control" />
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="mobNo" class="control-label">Mobile Number:</label>
+            <input asp-for="mobNo" class="form-control" />
+            <span asp-validation-for="mobNo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image" class="control-label">Upload Image:</label>
+            <input asp-for="Image" type="file" name="imageFile" class="form-control" accept="image/png, image/jpeg" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Which food you liked?</label><br />
+            <label><input type="checkbox" name="foodLiked" value="Sausage Burrito" /> Sausage Burrito</label><br />
+            <label><input type="checkbox" name="foodLiked" value="Chicken McNuggets®" /> Chicken McNuggets®</label><br />
+            <label><input type="checkbox" name="foodLiked" value="Spicy McCrispy™" /> Spicy McCrispy™</label><br />
+            <label><input type="checkbox" name="foodLiked" value="Iced Coffee" /> Iced Coffee</label><br />
+            <label><input type="checkbox" name="foodLiked" value="Egg McMuffin®" /> Egg McMuffin®</label><br />
+            <span asp-validation-for="foodLiked" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="preferedTimeSlot" class="control-label">Preferred Time Slot:</label>
+            <select asp-for="preferedTimeSlot" class="form-control">
+                <option value="">Select Time Slot</option>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Late night">Late night</option>
+            </select>
+            <span asp-validation-for="preferedTimeSlot" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Visiting first time?</label><br />
+            <label><input type="radio" asp-for="visitingStatus" value="Yes" /> Yes</label>
+            <label><input type="radio" asp-for="visitingStatus" value="No" /> No</label>
+            <span asp-validation-for="visitingStatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+  </div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+
+

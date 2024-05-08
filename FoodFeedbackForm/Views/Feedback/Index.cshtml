@@ -1,0 +1,123 @@
+﻿@model IEnumerable<FoodFeedbackForm.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- Include SweetAlert library (CDN link) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="col-12">
+<form asp-action="Index" method="get">
+     <div class="col-3" style="float:left; margin:26px">
+    <div class="form-group">
+        <label for="preferedTimeSlotFilter">Filter by Time Slot:</label>
+        <select id="preferedTimeSlotFilter" name="preferedTimeSlotFilter" class="form-control">
+            <option value="">All</option>
+            <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+            <option value="Evening">Evening</option>
+            <option value="Late night">Late night</option>
+        </select>
+    </div>
+    </div>
+
+        <div class="col-3" style="float:left; margin:26px">
+    <div class="form-group">
+        <label for="foodLikedFilter">Filter by Food Liked:</label>
+        <input id="foodLikedFilter" type="text" name="foodLikedFilter" class="form-control" />
+    </div>
+    </div>
+
+        <div class="col-3" style="float:left; margin:26px">
+    <div class="form-group">
+        <label for="visitingStatusFilter">Filter by Visiting Status:</label>
+        <select id="visitingStatusFilter" name="visitingStatusFilter" class="form-control">
+            <option value="">All</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    </div>
+
+        <div class="col-3" style="float:left; margin:26px">
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger form-control">Apply Filters</button>
+             </div>
+        </div>
+        <div class="col-3" style="float:left; margin:26px">
+            <div class="form-group">
+                <a asp-action="Create" class="btn btn-primary form-control">Feedback</a>
+            </div>
+        </div>
+</form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="7" class="text-center">Feedback List</th>
+        </tr>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Serial No.
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Mob No.
+            </th>
+            <th>
+                Food Liked
+            </th>
+            <th>
+                Prefered Time Slot
+            </th>
+            <th>
+                Visiting Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mobNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.foodLiked)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.preferedTimeSlot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.visitingStatus)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+
+    @if (TempData.ContainsKey("FeedbackSaved") && (bool)TempData["FeedbackSaved"])
+    {
+        <text>
+            Swal.fire({
+                icon: 'success',
+                title: 'Feedback Saved!',
+                text: 'Your feedback has been successfully saved.',
+            });
+        </text>
+    }
+</script>
